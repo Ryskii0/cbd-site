@@ -101,7 +101,44 @@ body {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-secondary);
   max-width: 560px;
-  margin: 0 auto 36px;
+  margin: 0 auto 28px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(28,25,23,0.12);
+  background: rgba(255,255,255,0.75);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s var(--ease);
+}
+
+.hero-link.primary {
+  color: white;
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.hero-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .hero-banner {
@@ -111,6 +148,7 @@ body {
   margin: 0 auto 48px;
   display: block;
   box-shadow: var(--shadow-lg);
+  object-fit: contain;
 }
 
 .hero-stats {
@@ -387,12 +425,23 @@ body {
 }
 
 .result-card {
-  padding: 24px 28px;
+  padding: 24px 26px;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 18px;
   transition: all 0.25s var(--ease);
   animation: cardIn 0.4s var(--ease) both;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-light));
+  opacity: 0.88;
 }
 
 .result-card:nth-child(1) { animation-delay: 0s; }
@@ -419,21 +468,22 @@ body {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .result-title {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-left: 2px;
 }
 
 .result-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .result-tag {
@@ -448,7 +498,35 @@ body {
 .result-reason {
   font-size: 0.88rem;
   color: var(--text-secondary);
+  line-height: 1.72;
+}
+
+.result-topic {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--accent-bg);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
   line-height: 1.6;
+}
+
+.result-topic strong {
+  color: var(--accent);
+}
+
+.result-match-note {
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+.result-reason a,
+.result-topic a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(194,65,12,0.24);
 }
 
 .match-empty {
@@ -575,10 +653,17 @@ body {
     font-size: 0.92rem;
     line-height: 1.55;
     max-width: 320px;
+    margin-bottom: 16px;
+  }
+  .hero-actions {
     margin-bottom: 22px;
   }
+  .hero-link {
+    padding: 9px 18px;
+    font-size: 0.84rem;
+  }
   .hero-banner {
-    width: calc(100vw - 24px);
+    width: 100%;
     max-width: none;
     border-radius: 12px;
     margin-bottom: 28px;
@@ -690,6 +775,9 @@ body {
     <div class="hero-eyebrow">WAIC 2026 期间</div>
     <h1>CBD After Party</h1>
     <p class="hero-subtitle">AI 时代最有密度的职场社交夜。大厂、顶校、先锋创业者、顶级 VC，在这里自然相遇。</p>
+    <div class="hero-actions">
+      <a class="hero-link primary" href="https://my.feishu.cn/share/base/form/shrcnIm2QblmXOEDiOgvTjqrLlb" target="_blank" rel="noopener">立即报名</a>
+    </div>
     <img src="image.png" alt="CBD WAIC After Party" class="hero-banner" />
     <div class="hero-stats">
       <div class="stat">
@@ -841,15 +929,15 @@ body {
   <div class="container">
     <div class="section-header reveal">
       <h2>找到你的人</h2>
-      <p>描述你想认识的人，我们帮你从参与者中智能匹配</p>
+      <p>输入方向、行业或角色，从真实报名信息里找 3 位最值得聊的人</p>
     </div>
 
     <div class="match-box reveal">
       <div class="match-input-wrap">
-        <input class="match-input" type="text" id="matchInput" placeholder="例：想认识做具身智能的创业者" />
+        <input class="match-input" type="text" id="matchInput" placeholder="例：金融 / 具身智能创业者 / 投资人" />
         <button class="match-btn" id="matchBtn" onclick="doMatch()">匹配</button>
       </div>
-      <div class="match-hint">试试输入方向、角色、或你想聊的话题</div>
+      <div class="match-hint">当前为本地关键词匹配：会扩展同义词并按公司、角色、兴趣、介绍、话题加权排序</div>
       <div class="match-results" id="matchResults"></div>
     </div>
   </div>
@@ -891,7 +979,15 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 let guests = [];
 
 async function loadGuests() {
-  guests = getFallbackGuests();
+  try {
+    const res = await fetch('guests.md', { cache: 'no-store' });
+    if (!res.ok) throw new Error('guests.md not found');
+    const text = await res.text();
+    const parsed = parseGuestsMd(text);
+    guests = parsed.length ? parsed : getFallbackGuests();
+  } catch (e) {
+    guests = getFallbackGuests();
+  }
 }
 
 function parseGuestsMd(text) {
@@ -906,7 +1002,7 @@ function parseGuestsMd(text) {
       }
     });
     return guest;
-  }).filter(g => g.org);
+  }).filter(g => g.org || g.role || g.bio || g.topic);
 }
 
 function getFallbackGuests() {
@@ -939,84 +1035,149 @@ function getFallbackGuests() {
   ];
 }
 
-// Keyword matching
-function scoreGuest(guest, query) {
-  const q = query.toLowerCase();
-  const fields = [
-    guest.org || '',
-    guest.role || '',
-    guest.interests || '',
-    guest.bio || '',
-    guest.topic || ''
-  ].join(' ').toLowerCase();
+function normalizeText(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0xFEE0))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function linkify(value) {
+  const safe = escapeHtml(value);
+  return safe.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+function getGuestSearchText(guest) {
+  return normalizeText([
+    guest.org,
+    guest.role,
+    guest.interests,
+    guest.bio,
+    guest.topic
+  ].filter(Boolean).join(' '));
+}
+
+// Local keyword matching. This is not embedding; aliases make natural searches more forgiving.
+function scoreGuest(guest, query) {
+  const fieldWeights = [
+    ['interests', 14],
+    ['role', 12],
+    ['org', 10],
+    ['topic', 8],
+    ['bio', 5]
+  ];
   let score = 0;
   const reasons = [];
+  const terms = expandQueryTerms(query);
 
-  // Keywords to match
-  const keywords = extractKeywords(q);
-
-  keywords.forEach(kw => {
-    if (fields.includes(kw)) {
-      score += 10;
-      // Determine which field matched
-      if ((guest.interests || '').toLowerCase().includes(kw)) {
-        reasons.push(`关注「${kw}」方向`);
-      } else if ((guest.topic || '').toLowerCase().includes(kw)) {
-        reasons.push(`想聊「${kw}」相关话题`);
-      } else if ((guest.role || '').toLowerCase().includes(kw)) {
-        reasons.push(`角色匹配「${kw}」`);
-      } else if ((guest.org || '').toLowerCase().includes(kw)) {
-        reasons.push(`来自相关机构`);
-      } else if ((guest.bio || '').toLowerCase().includes(kw)) {
-        reasons.push(`背景涉及「${kw}」`);
+  terms.forEach(term => {
+    fieldWeights.forEach(([field, weight]) => {
+      const fieldText = normalizeText(guest[field]);
+      if (fieldText.includes(term)) {
+        score += weight;
+        if (field === 'interests') reasons.push(`兴趣方向含「${term}」`);
+        if (field === 'role') reasons.push(`角色匹配「${term}」`);
+        if (field === 'org') reasons.push(`组织背景含「${term}」`);
+        if (field === 'topic') reasons.push(`想聊话题含「${term}」`);
+        if (field === 'bio') reasons.push(`介绍提到「${term}」`);
       }
-    }
+    });
   });
 
-  // Boost for multiple matches
-  if (reasons.length > 1) score += 5;
+  const normalizedQuery = normalizeText(query);
+  if (normalizedQuery && getGuestSearchText(guest).includes(normalizedQuery)) {
+    score += 18;
+  }
+
+  if (reasons.length > 1) {
+    score += Math.min(reasons.length * 2, 10);
+  }
 
   return { score, reasons: [...new Set(reasons)].slice(0, 2) };
 }
 
-function extractKeywords(query) {
-  // Common keywords mapping
-  const keywordMap = {
-    '具身': '具身智能', '机器人': '具身智能', 'embodied': '具身智能',
-    'agent': 'ai agent', '智能体': 'ai agent',
-    '大模型': '大模型/llm', 'llm': '大模型/llm', '语言模型': '大模型/llm',
-    '医疗': 'ai+医疗', '医': 'ai+医疗', '健康': 'ai+医疗',
-    '教育': 'ai+教育',
-    '自动驾驶': '自动驾驶', '无人车': '自动驾驶', '驾驶': '自动驾驶',
-    '产品': '产品', 'pm': '产品经理', '产品经理': '产品经理',
-    '工程师': '工程师', '开发': '工程师', '技术': '工程师', '算法': '算法',
-    '创业': '创业', '创始人': '创始人', 'founder': '创始人', 'startup': '创业',
-    '投资': '投资', 'vc': '投资', '资本': '投资',
-    '学生': '在读', '高校': '大学', '学术': '大学', '博士': '博士', '硕士': '硕士',
-    '记者': '记者', '媒体': '记者',
-    '律师': '律师', '法律': '律师',
-    '设计': '设计', '游戏': '游戏',
-    '社区': '社区', '运营': '运营',
-  };
+function expandQueryTerms(query) {
+  const q = normalizeText(query);
+  const aliasGroups = [
+    ['金融', '金融科技', 'fintech', '投资', '投融资', '融资', '基金', '资本', '资本市场', 'vc', 'pe', '财经', '证券', '保险', '理财', '量化', '分析师', '投资人', '投资经理', '战略投资', '保诚'],
+    ['投资', '投资人', '投资经理', 'vc', 'pe', '基金', '资本', '投融资', '融资', '看项目', '早期投资', '产业基金'],
+    ['财经', '媒体', '记者', '内容', '写作', '报道', '公众号', '短评'],
+    ['具身', '具身智能', '机器人', 'humanoid', 'embodied', '脑机接口', '自动驾驶'],
+    ['agent', 'ai agent', '智能体', '多agent', 'multi-agent', 'agentic', '工作流'],
+    ['大模型', 'llm', '语言模型', '多模态', '模型', 'infra', '推理优化'],
+    ['医疗', 'ai+医疗', '健康', '药物', '影像', '临床', '医院', '骨科', '脑机接口'],
+    ['教育', 'ai+教育', '培训', '学习', '高校', '学生'],
+    ['产品', 'pm', '产品经理', '增长', '运营', '商业化'],
+    ['创业', '创业者', '创始人', 'founder', 'startup', '独立开发者', '一人公司'],
+    ['设计', '设计师', '交互', '视觉', '工业设计'],
+    ['法律', '律师', '合规', '法律科技'],
+    ['出海', '跨境', 'gtm', '海外', 'web3']
+  ];
+  const terms = new Set();
 
-  const words = query.replace(/[，。！？、]/g, ' ').split(/\s+/).filter(w => w.length > 0);
-  const keywords = new Set();
+  q.split(/[，。！？、,.;:：；\s/]+/).filter(Boolean).forEach(part => {
+    if (part.length > 1) terms.add(part);
+  });
 
-  words.forEach(word => {
-    // Check direct map
-    Object.entries(keywordMap).forEach(([key, value]) => {
-      if (word.includes(key)) {
-        keywords.add(value.toLowerCase());
-      }
-    });
-    // Also add the raw word if it's meaningful (>1 char)
-    if (word.length > 1) {
-      keywords.add(word.toLowerCase());
+  aliasGroups.forEach(group => {
+    if (group.some(alias => q.includes(normalizeText(alias)))) {
+      group.forEach(alias => terms.add(normalizeText(alias)));
     }
   });
 
-  return [...keywords];
+  return [...terms].filter(term => term.length > 1);
+}
+
+function getFallbackMatches(query) {
+  const searchText = normalizeText(query);
+  const broadTerms = expandQueryTerms(query);
+  return guests
+    .map(g => {
+      const text = getGuestSearchText(g);
+      const lightScore = broadTerms.reduce((sum, term) => sum + (text.includes(term) ? 1 : 0), 0);
+      return { ...g, score: lightScore, reasons: ['可能有间接相关背景'] };
+    })
+    .filter(g => g.score > 0 || searchText.length > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+}
+
+function renderGuestCard(g, i) {
+  const title = [g.org || '未填写组织', g.role || '未填写角色'].map(escapeHtml).join('・');
+  const tags = (g.interests || '开放交流')
+    .split(/[,，、]/)
+    .map(t => t.trim())
+    .filter(Boolean)
+    .map(t => `<span class="result-tag">${escapeHtml(t)}</span>`)
+    .join('');
+  const cleanBio = g.topic ? String(g.bio || '').replace(/[。.\s]*想聊[:：].*$/s, '').trim() : g.bio;
+  const bio = cleanBio ? linkify(cleanBio) : '这位嘉宾暂未填写详细介绍，可以现场从共同兴趣开始聊。';
+  const topic = g.topic ? `<div class="result-topic"><strong>想聊：</strong>${linkify(g.topic)}</div>` : '';
+  const note = g.reasons && g.reasons.length
+    ? `<div class="result-match-note">匹配理由：${g.reasons.map(escapeHtml).join('、')}</div>`
+    : '';
+
+  return `
+    <div class="result-card">
+      <div class="result-rank">${i + 1}</div>
+      <div class="result-title">${title}</div>
+      <div class="result-tags">${tags}</div>
+      <div class="result-reason">${bio}</div>
+      ${topic}
+      ${note}
+    </div>
+  `;
 }
 
 function doMatch() {
@@ -1036,7 +1197,7 @@ function doMatch() {
   }
 
   // Score all guests
-  const scored = guests.map(g => {
+  let scored = guests.map(g => {
     const { score, reasons } = scoreGuest(g, input);
     return { ...g, score, reasons };
   }).filter(g => g.score > 0)
@@ -1044,21 +1205,14 @@ function doMatch() {
     .slice(0, 3);
 
   if (scored.length === 0) {
-    resultsEl.innerHTML = '<div class="match-empty">暂未匹配到合适的人选，试试换个描述？比如方向、角色或话题</div>';
-    resultsEl.classList.add('visible');
-    return;
+    scored = getFallbackMatches(input);
   }
 
-  resultsEl.innerHTML = scored.map((g, i) => `
-    <div class="result-card">
-      <div class="result-rank">${i + 1}</div>
-      <div class="result-title">${g.org}・${g.role}</div>
-      <div class="result-tags">
-        ${(g.interests || '').split(',').map(t => `<span class="result-tag">${t.trim()}</span>`).join('')}
-      </div>
-      <div class="result-reason">${g.bio}${g.topic ? '<div style="margin-top:8px;padding:8px 12px;background:var(--accent-bg);border-radius:8px;font-size:0.88rem;color:var(--text-secondary)"><strong style="color:var(--accent)">想聊：</strong>' + g.topic + '</div>' : ''}${g.reasons.length ? '<br><em style="color:var(--accent);font-size:0.82rem">匹配理由：' + g.reasons.join('、') + '</em>' : ''}</div>
-    </div>
-  `).join('');
+  if (scored.length === 0) {
+    resultsEl.innerHTML = '<div class="match-empty">暂未匹配到合适的人选，试试换个更宽泛的描述，比如行业、角色或想聊的话题。</div>';
+  } else {
+    resultsEl.innerHTML = scored.map(renderGuestCard).join('');
+  }
 
   resultsEl.classList.remove('visible');
   void resultsEl.offsetWidth;
