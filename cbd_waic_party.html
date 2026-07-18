@@ -576,6 +576,85 @@ body {
   font-size: 0.95rem;
 }
 
+.signup-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 860px;
+  margin: 30px auto 20px;
+  text-align: left;
+}
+
+.signup-card {
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow-sm);
+}
+
+.signup-card.primary {
+  border-color: rgba(194, 65, 12, 0.22);
+  background:
+    linear-gradient(135deg, rgba(255, 247, 237, 0.96), rgba(255, 255, 255, 0.84));
+}
+
+.step-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  margin-bottom: 14px;
+}
+
+.signup-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.signup-card p {
+  max-width: none;
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.mini-program-code {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(28, 25, 23, 0.06);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  word-break: break-all;
+  margin-top: 12px;
+}
+
+.mini-program-tip {
+  color: var(--text-tertiary);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.fee-note {
+  max-width: 860px;
+  margin: 20px auto 0;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(28, 25, 23, 0.05);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.75;
+  text-align: left;
+}
+
 .cta-btn {
   display: inline-flex;
   align-items: center;
@@ -592,6 +671,13 @@ body {
   text-decoration: none;
   transition: all 0.25s var(--ease);
   box-shadow: var(--shadow-md);
+}
+
+.cta-btn.secondary {
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cta-btn:hover {
@@ -746,10 +832,35 @@ body {
     padding: 52px 16px 74px;
   }
   .cta-section p {
-    max-width: 300px;
+    max-width: 330px;
     margin: 0 auto 24px;
     font-size: 0.88rem;
     line-height: 1.55;
+  }
+  .signup-steps {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 24px auto 16px;
+  }
+  .signup-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+  .signup-card h3 {
+    font-size: 1.05rem;
+  }
+  .signup-card p {
+    max-width: none;
+    margin-bottom: 16px;
+    font-size: 0.84rem;
+  }
+  .fee-note {
+    padding: 16px;
+    border-radius: 18px;
+    font-size: 0.8rem;
+  }
+  .mini-program-code {
+    font-size: 0.72rem;
   }
   .cta-btn {
     padding: 14px 30px;
@@ -776,7 +887,7 @@ body {
     <h1>CBD After Party</h1>
     <p class="hero-subtitle">AI 时代最有密度的职场社交夜。大厂、顶校、先锋创业者、顶级 VC，在这里自然相遇。</p>
     <div class="hero-actions">
-      <a class="hero-link primary" href="https://my.feishu.cn/share/base/form/shrcnIm2QblmXOEDiOgvTjqrLlb" target="_blank" rel="noopener">立即报名</a>
+      <a class="hero-link primary" href="#signup">立即报名</a>
     </div>
     <img src="image.png" alt="CBD WAIC After Party" class="hero-banner" />
     <div class="hero-stats">
@@ -943,13 +1054,32 @@ body {
 </section>
 
 <!-- CTA -->
-<section class="cta-section reveal">
-  <h2>一起来吗？</h2>
-  <p>上海 · 深圳双城联动 ｜ WAIC 期间最值得参加的 After Party</p>
-  <a class="cta-btn" href="https://my.feishu.cn/share/base/form/shrcnIm2QblmXOEDiOgvTjqrLlb" target="_blank" rel="noopener" aria-label="打开飞书报名表">
-    立即报名
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-  </a>
+<section class="cta-section reveal" id="signup">
+  <h2>完成报名</h2>
+  <p>报名需要同时完成两步：先在活动行完成付费锁定名额，再填写问卷方便我们做现场匹配。</p>
+  <div class="signup-steps">
+    <div class="signup-card primary">
+      <div class="step-label">Step 01 · 活动行</div>
+      <h3>先完成付费报名</h3>
+      <p>活动行承接付费流程。早鸟票限量，感谢大家积极报名，目前剩余名额不多，今天截止。</p>
+      <button class="cta-btn" type="button" onclick="copyMiniProgramLink(this)" aria-label="复制活动行小程序链接">
+        复制活动行小程序链接
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <div class="mini-program-code" id="miniProgramCode">#小程序://活动行/BJwDwD1wWtFEMPd</div>
+      <div class="mini-program-tip">如未直接唤起小程序，请复制后粘贴到微信聊天框，再点击打开。</div>
+    </div>
+    <div class="signup-card">
+      <div class="step-label">Step 02 · 问卷</div>
+      <h3>再填写报名问卷</h3>
+      <p>问卷用于确认你的背景、兴趣方向和想聊话题，方便我们做现场社交匹配。</p>
+      <a class="cta-btn secondary" href="https://my.feishu.cn/share/base/form/shrcnIm2QblmXOEDiOgvTjqrLlb" target="_blank" rel="noopener" aria-label="打开飞书报名表">
+        填写问卷
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="fee-note">费用说明：活动费用按 AA 预先收取，用于场地、两杯赠饮精酿（可凭现场发放的专属名片免费领取）、活动行平台抽佣、物料打印和现场摄影等，主办方不做盈利。</div>
 </section>
 
 <footer class="footer">
@@ -957,6 +1087,45 @@ body {
 </footer>
 
 <script>
+const MINI_PROGRAM_LINK = '#小程序://活动行/BJwDwD1wWtFEMPd';
+
+async function copyMiniProgramLink(button) {
+  try {
+    let copied = false;
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(MINI_PROGRAM_LINK);
+        copied = true;
+      } catch (e) {
+        copied = false;
+      }
+    }
+
+    if (!copied) {
+      const textarea = document.createElement('textarea');
+      textarea.value = MINI_PROGRAM_LINK;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      copied = document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    if (!copied) throw new Error('copy failed');
+
+    const originalText = '复制活动行小程序链接';
+    button.childNodes[0].nodeValue = '已复制，去微信打开 ';
+    setTimeout(() => {
+      button.childNodes[0].nodeValue = originalText;
+    }, 2200);
+  } catch (e) {
+    const code = document.getElementById('miniProgramCode');
+    if (code) code.textContent = `${MINI_PROGRAM_LINK}（复制失败，请手动复制）`;
+  }
+}
+
 // ===== Scroll Reveal =====
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
