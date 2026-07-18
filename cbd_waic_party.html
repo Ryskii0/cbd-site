@@ -557,14 +557,128 @@ body {
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 640px) {
-  .hero { padding: 80px 20px 60px; }
-  .hero-stats { gap: 28px; }
-  .stat-value { font-size: 1.8rem; }
-  .interest-number { font-size: 1.8rem; }
-  .interest-cell { padding: 24px 16px; }
-  .match-input { padding: 16px 20px; padding-right: 90px; font-size: 0.95rem; }
-  .result-card { padding: 20px; }
-  .tag { font-size: 0.82rem; padding: 6px 12px; }
+  .container { padding: 0 16px; }
+  .hero { padding: 48px 12px 36px; }
+  .hero::after { height: 260px; }
+  .hero-eyebrow {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 8.6vw, 2.35rem);
+    line-height: 1.04;
+    letter-spacing: -0.05em;
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+  .hero-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: 320px;
+    margin-bottom: 22px;
+  }
+  .hero-banner {
+    width: calc(100vw - 24px);
+    max-width: none;
+    border-radius: 12px;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    gap: 0;
+    justify-content: space-between;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .stat-value { font-size: 1.55rem; }
+  .stat-label {
+    font-size: 0.72rem;
+    margin-top: 4px;
+  }
+  .from-section,
+  .interests-section,
+  .match-section {
+    padding: 48px 12px;
+  }
+  .section-header {
+    margin-bottom: 30px;
+  }
+  .section-header h2 {
+    font-size: 1.55rem;
+    margin-bottom: 6px;
+  }
+  .section-header p {
+    font-size: 0.86rem;
+  }
+  .tag-group {
+    margin-bottom: 22px;
+  }
+  .tag-group-label {
+    font-size: 0.68rem;
+    margin-bottom: 8px;
+  }
+  .tags {
+    gap: 6px;
+  }
+  .tag {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+  }
+  .tag-note {
+    font-size: 0.72rem;
+    margin-top: 8px;
+  }
+  .interest-grid {
+    border-radius: 14px;
+  }
+  .interest-cell {
+    padding: 18px 12px;
+  }
+  .interest-number { font-size: 1.55rem; }
+  .interest-name {
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+  }
+  .interest-pct {
+    font-size: 0.66rem;
+  }
+  .interest-bar-mini {
+    margin-top: 8px;
+  }
+  .match-input {
+    padding: 14px 16px;
+    padding-right: 82px;
+    font-size: 0.9rem;
+  }
+  .match-btn {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+  .match-hint {
+    margin-bottom: 24px;
+  }
+  .result-card { padding: 18px; }
+  .cta-section {
+    padding: 52px 16px 74px;
+  }
+  .cta-section p {
+    max-width: 300px;
+    margin: 0 auto 24px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .cta-btn {
+    padding: 14px 30px;
+  }
+  .footer {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.86rem;
+    letter-spacing: -0.06em;
+  }
 }
 </style>
 </head>
