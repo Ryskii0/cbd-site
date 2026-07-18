@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBD × WAIC 2026 After Party</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --bg: #FAFAF8;
+  --bg-warm: #F5F0EA;
+  --text: #1C1917;
+  --text-secondary: #57534E;
+  --text-tertiary: #A8A29E;
+  --accent: #C2410C;
+  --accent-light: #FED7AA;
+  --accent-bg: #FFF7ED;
+  --border: #E7E5E4;
+  --card-bg: #FFFFFF;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(28,25,23,0.04);
+  --shadow-md: 0 4px 16px rgba(28,25,23,0.06);
+  --shadow-lg: 0 8px 32px rgba(28,25,23,0.08);
+  --font-serif: 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Utility */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 120px 24px 80px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 400px;
+  background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+  z-index: -1;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+
+.hero-banner {
+  width: 100%;
+  max-width: 960px;
+  border-radius: 18px;
+  margin: 0 auto 48px;
+  display: block;
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ============ FROM SECTION ============ */
+.from-section {
+  padding: 80px 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.tag-group {
+  margin-bottom: 32px;
+}
+
+.tag-group-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  padding-left: 2px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  font-weight: 450;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  transition: all 0.25s var(--ease);
+  cursor: default;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.tag.highlight {
+  background: var(--accent-bg);
+  border-color: var(--accent-light);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.tag-note {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  margin-top: 12px;
+  padding-left: 2px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ============ INTERESTS ============ */
+.interests-section {
+  padding: 100px 24px;
+  background: var(--bg-warm);
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .interest-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.interest-cell {
+  background: var(--card-bg);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.interest-cell:hover {
+  background: var(--accent-bg);
+}
+
+.interest-number {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.interest-cell:hover .interest-number {
+  color: var(--accent);
+}
+
+.interest-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.interest-bar-mini {
+  width: 100%;
+  height: 3px;
+  background: var(--bg);
+  border-radius: 2px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.interest-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.6;
+  transition: width 1.2s var(--ease);
+  width: 0;
+}
+
+.interest-cell:nth-child(1) .interest-bar-fill { background: #C2410C; }
+.interest-cell:nth-child(2) .interest-bar-fill { background: #D97706; }
+.interest-cell:nth-child(3) .interest-bar-fill { background: #059669; }
+.interest-cell:nth-child(4) .interest-bar-fill { background: #2563EB; }
+.interest-cell:nth-child(5) .interest-bar-fill { background: #7C3AED; }
+.interest-cell:nth-child(6) .interest-bar-fill { background: #DB2777; }
+
+.interest-pct {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+
+/* ============ MATCH SECTION ============ */
+.match-section {
+  padding: 100px 24px;
+}
+
+.match-box {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.match-input-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.match-input {
+  width: 100%;
+  padding: 18px 24px;
+  padding-right: 100px;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.match-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.08);
+}
+
+.match-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.match-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: white;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.match-btn:hover {
+  background: #9A3412;
+  transform: translateY(-50%) scale(1.02);
+}
+
+.match-btn:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.match-hint {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.match-results {
+  display: grid;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.5s var(--ease);
+}
+
+.match-results.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.result-card {
+  padding: 24px 28px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.25s var(--ease);
+  animation: cardIn 0.4s var(--ease) both;
+}
+
+.result-card:nth-child(1) { animation-delay: 0s; }
+.result-card:nth-child(2) { animation-delay: 0.1s; }
+.result-card:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+}
+
+.result-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.result-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.result-tag {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--bg-warm);
+  color: var(--text-secondary);
+  font-weight: 450;
+}
+
+.result-reason {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.match-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+}
+
+.match-loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-tertiary);
+}
+
+.match-loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============ CTA ============ */
+.cta-section {
+  padding: 80px 24px 120px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+}
+
+.cta-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: white;
+  background: var(--text);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+  box-shadow: var(--shadow-md);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+.cta-btn svg {
+  width: 16px; height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.cta-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  border-top: 1px solid var(--border);
+}
+
+/* ============ REVEAL ANIMATIONS ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 640px) {
+  .hero { padding: 80px 20px 60px; }
+  .hero-stats { gap: 28px; }
+  .stat-value { font-size: 1.8rem; }
+  .interest-number { font-size: 1.8rem; }
+  .interest-cell { padding: 24px 16px; }
+  .match-input { padding: 16px 20px; padding-right: 90px; font-size: 0.95rem; }
+  .result-card { padding: 20px; }
+  .tag { font-size: 0.82rem; padding: 6px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">WAIC 2026 期间</div>
+    <h1>CBD After Party</h1>
+    <p class="hero-subtitle">AI 时代最有密度的职场社交夜。大厂、顶校、先锋创业者、顶级 VC，在这里自然相遇。</p>
+    <img src="image.png" alt="CBD WAIC After Party" class="hero-banner" />
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value">166+</div>
+        <div class="stat-label">报名者</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">50+</div>
+        <div class="stat-label">机构覆盖</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">2</div>
+        <div class="stat-label">城市联动</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- From Section -->
+<section class="from-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Ta 们来自</h2>
+      <p>还在持续增加中</p>
+    </div>
+
+    <div class="tag-group reveal">
+      <div class="tag-group-label">科技大厂</div>
+      <div class="tags">
+        <span class="tag highlight">字节跳动</span>
+        <span class="tag highlight">腾讯</span>
+        <span class="tag highlight">阿里巴巴</span>
+        <span class="tag">华为</span>
+        <span class="tag">NVIDIA</span>
+        <span class="tag">百度</span>
+        <span class="tag">京东</span>
+        <span class="tag">拼多多</span>
+        <span class="tag">小红书</span>
+        <span class="tag">哔哩哔哩</span>
+        <span class="tag">MiniMax</span>
+        <span class="tag">荣耀</span>
+        <span class="tag">Shopee</span>
+        <span class="tag">平安科技</span>
+      </div>
+    </div>
+
+    <div class="tag-group reveal">
+      <div class="tag-group-label">顶尖院校</div>
+      <div class="tags">
+        <span class="tag highlight">清华大学</span>
+        <span class="tag highlight">北京大学</span>
+        <span class="tag">复旦大学</span>
+        <span class="tag">上海交通大学</span>
+        <span class="tag">浙江大学</span>
+        <span class="tag">香港中文大学</span>
+        <span class="tag">香港大学</span>
+        <span class="tag">哈工大</span>
+        <span class="tag">普林斯顿大学</span>
+        <span class="tag">哥伦比亚大学</span>
+        <span class="tag">CMU</span>
+        <span class="tag">UC 系</span>
+        <span class="tag">UBC</span>
+        <span class="tag">爱丁堡大学</span>
+      </div>
+    </div>
+
+    <div class="tag-group reveal">
+      <div class="tag-group-label">投资机构</div>
+      <div class="tags">
+        <span class="tag">头部美元 VC</span>
+        <span class="tag">知名早期创投</span>
+        <span class="tag">产业资本（新能源）</span>
+        <span class="tag">产业资本（半导体）</span>
+        <span class="tag">公募基金</span>
+        <span class="tag">政府引导基金</span>
+        <span class="tag">北美 FinTech VC</span>
+      </div>
+      <p class="tag-note">* 为保护嘉宾隐私及尊重投资行业惯例，机构名称已做脱敏处理。欢迎来现场认识 ta 们。</p>
+    </div>
+
+    <div class="tag-group reveal">
+      <div class="tag-group-label">AI 先锋创业团队</div>
+      <div class="tags">
+        <span class="tag">AI Agent 方向（已融资）</span>
+        <span class="tag">具身智能公司</span>
+        <span class="tag">AI 对齐 / 安全</span>
+        <span class="tag">AI + 设计工具</span>
+        <span class="tag">AI + 法律科技</span>
+        <span class="tag">一人公司社区</span>
+        <span class="tag">开源 AI Lab</span>
+        <span class="tag">以及 10+ 支硬核初创团队</span>
+      </div>
+      <p class="tag-note">* 早期团队多处于融资或隐身阶段，我们选择只展示方向而非名称。好奇具体是谁？现场见。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Interest Grid -->
+<section class="interests-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>最关注的方向</h2>
+      <p>166 位参与者的兴趣分布</p>
+    </div>
+
+    <div class="interest-grid reveal" id="interestGrid">
+      <div class="interest-cell">
+        <div class="interest-number">133</div>
+        <div class="interest-name">AI Agent</div>
+        <div class="interest-pct">80% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="100%"></div></div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-number">103</div>
+        <div class="interest-name">大模型 / LLM</div>
+        <div class="interest-pct">62% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="77%"></div></div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-number">78</div>
+        <div class="interest-name">具身智能</div>
+        <div class="interest-pct">47% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="59%"></div></div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-number">42</div>
+        <div class="interest-name">AI + 教育</div>
+        <div class="interest-pct">25% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="32%"></div></div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-number">30</div>
+        <div class="interest-name">AI + 医疗</div>
+        <div class="interest-pct">18% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="23%"></div></div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-number">20</div>
+        <div class="interest-name">自动驾驶</div>
+        <div class="interest-pct">12% 参与者关注</div>
+        <div class="interest-bar-mini"><div class="interest-bar-fill" data-width="15%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Smart Match -->
+<section class="match-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>找到你的人</h2>
+      <p>描述你想认识的人，我们帮你从参与者中智能匹配</p>
+    </div>
+
+    <div class="match-box reveal">
+      <div class="match-input-wrap">
+        <input class="match-input" type="text" id="matchInput" placeholder="例：想认识做具身智能的创业者" />
+        <button class="match-btn" id="matchBtn" onclick="doMatch()">匹配</button>
+      </div>
+      <div class="match-hint">试试输入方向、角色、或你想聊的话题</div>
+      <div class="match-results" id="matchResults"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <h2>一起来吗？</h2>
+  <p>上海 · 深圳双城联动 ｜ WAIC 期间最值得参加的 After Party</p>
+  <a class="cta-btn" href="https://my.feishu.cn/share/base/form/shrcnIm2QblmXOEDiOgvTjqrLlb" target="_blank" rel="noopener" aria-label="打开飞书报名表">
+    立即报名
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  </a>
+</section>
+
+<footer class="footer">
+  <p>CBD 职场社群 × WAIC 2026</p>
+</footer>
+
+<script>
+// ===== Scroll Reveal =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate interest bars
+      entry.target.querySelectorAll('.interest-bar-fill').forEach(bar => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.width;
+        }, 300);
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ===== Guest Data Loading & Matching =====
+let guests = [];
+
+async function loadGuests() {
+  guests = getFallbackGuests();
+}
+
+function parseGuestsMd(text) {
+  const sections = text.split(/^## /m).filter(s => s.trim());
+  return sections.map(section => {
+    const lines = section.trim().split('\n');
+    const guest = { name: lines[0].trim() };
+    lines.forEach(line => {
+      const match = line.match(/^- (\w+):\s*(.+)/);
+      if (match) {
+        guest[match[1]] = match[2].trim();
+      }
+    });
+    return guest;
+  }).filter(g => g.org);
+}
+
+function getFallbackGuests() {
+  return [
+    { org: "某头部短视频平台", role: "AI 产品经理", interests: "AI Agent, 大模型/LLM", bio: "负责AI产品0-1孵化，关注Agent在内容生态中的应用落地" },
+    { org: "某社交电商平台", role: "内容生态负责人", interests: "AI Agent, 大模型/LLM", bio: "负责内容生态及增长战略，探索AI重塑内容创作与消费的路径" },
+    { org: "某AI初创公司（天使轮）", role: "创始人", interests: "AI Agent, 大模型/LLM", bio: "连续创业者，正在做AI协作方向产品，技术背景深厚" },
+    { org: "清华大学", role: "在读博士", interests: "具身智能, 大模型/LLM", bio: "计算机系研究具身智能与多模态感知，顶会论文作者" },
+    { org: "某头部VC", role: "投资人", interests: "具身智能, AI Agent", bio: "专注AI早期投资，已投出多个明星项目，当前看具身智能方向" },
+    { org: "某互联网大厂（社交方向）", role: "高级工程师", interests: "AI Agent, 大模型/LLM", bio: "微信生态技术专家，关注大模型在社交场景的集成" },
+    { org: "北京大学", role: "在读硕士", interests: "AI Agent, AI+教育", bio: "信息工程方向，研究AI在教育场景的个性化应用" },
+    { org: "某达摩院级实验室", role: "产品专家", interests: "AI Agent, 大模型/LLM", bio: "0-1孵化AI产品并落地，项目已登上WAIC展台展示" },
+    { org: "普林斯顿大学", role: "在读研究生", interests: "大模型/LLM, AI Agent", bio: "研究大语言模型的对齐与安全，中美双边AI行业经验" },
+    { org: "某头部GPU厂商", role: "解决方案架构师", interests: "大模型/LLM, 自动驾驶", bio: "负责AI基础设施方案设计，服务多家头部AI公司" },
+    { org: "某新能源车企资本", role: "投资经理", interests: "自动驾驶, 具身智能", bio: "关注自动驾驶与机器人赛道早期项目，产业资本视角" },
+    { org: "香港中文大学（深圳）", role: "在读研究生", interests: "大模型/LLM, AI+医疗", bio: "全球研究方向，关注AI在跨境医疗与健康领域的应用" },
+    { org: "某独立开发者社区", role: "创业者/社区主理人", interests: "AI Agent, 大模型/LLM", bio: "运营国内最大线下一人公司社区，两年150场活动3000人参与" },
+    { org: "某头部电商平台", role: "算法工程师", interests: "大模型/LLM, AI Agent", bio: "负责商业化算法，研究大模型在推荐系统中的应用" },
+    { org: "某科技财经媒体", role: "深度记者", interests: "具身智能, AI Agent", bio: "曾写出多篇10w+报道，现转型科技线关注AI与机器人" },
+    { org: "上海交通大学", role: "在读硕士/创业者", interests: "AI Agent, AI+教育", bio: "青年创业者，探索AI赋能教育公平的产品化路径" },
+    { org: "某头部云计算厂商", role: "产品经理", interests: "大模型/LLM, AI Agent", bio: "负责云上AI服务产品规划，关注大模型落地基础设施" },
+    { org: "某快消外企", role: "市场管培/副业创业者", interests: "AI Agent, 大模型/LLM", bio: "主业品牌营销，副业探索agentic commerce方向创业" },
+    { org: "哥伦比亚大学/某半导体基金", role: "投资分析师", interests: "大模型/LLM, AI Agent", bio: "关注AI芯片与基础设施投资，中美双边视角" },
+    { org: "某具身智能创业公司", role: "联合创始人/CTO", interests: "具身智能, 大模型/LLM", bio: "机器人技术背景，研发多模态感知与操控系统" },
+    { org: "某头部游戏公司", role: "AI技术负责人", interests: "AI Agent, 大模型/LLM", bio: "探索AI在游戏NPC、叙事生成中的应用，技术团队leader" },
+    { org: "复旦大学", role: "在读博士", interests: "大模型/LLM, AI+医疗", bio: "数学交叉方向，研究AI辅助药物发现与医疗影像分析" },
+    { org: "某红圈律所", role: "律师", interests: "AI Agent, 大模型/LLM", bio: "关注AI合规与法律科技，探索LLM在法律实务中的应用" },
+    { org: "某三甲医院", role: "临床医生/研究者", interests: "AI+医疗, 大模型/LLM", bio: "探索AI辅助诊断与临床决策支持系统的落地" },
+    { org: "浙江大学", role: "在读硕士", interests: "AI Agent, 具身智能", bio: "研究多智能体协作与机器人规划，参与过开源项目" }
+  ];
+}
+
+// Keyword matching
+function scoreGuest(guest, query) {
+  const q = query.toLowerCase();
+  const fields = [
+    guest.org || '',
+    guest.role || '',
+    guest.interests || '',
+    guest.bio || '',
+    guest.topic || ''
+  ].join(' ').toLowerCase();
+
+  let score = 0;
+  const reasons = [];
+
+  // Keywords to match
+  const keywords = extractKeywords(q);
+
+  keywords.forEach(kw => {
+    if (fields.includes(kw)) {
+      score += 10;
+      // Determine which field matched
+      if ((guest.interests || '').toLowerCase().includes(kw)) {
+        reasons.push(`关注「${kw}」方向`);
+      } else if ((guest.topic || '').toLowerCase().includes(kw)) {
+        reasons.push(`想聊「${kw}」相关话题`);
+      } else if ((guest.role || '').toLowerCase().includes(kw)) {
+        reasons.push(`角色匹配「${kw}」`);
+      } else if ((guest.org || '').toLowerCase().includes(kw)) {
+        reasons.push(`来自相关机构`);
+      } else if ((guest.bio || '').toLowerCase().includes(kw)) {
+        reasons.push(`背景涉及「${kw}」`);
+      }
+    }
+  });
+
+  // Boost for multiple matches
+  if (reasons.length > 1) score += 5;
+
+  return { score, reasons: [...new Set(reasons)].slice(0, 2) };
+}
+
+function extractKeywords(query) {
+  // Common keywords mapping
+  const keywordMap = {
+    '具身': '具身智能', '机器人': '具身智能', 'embodied': '具身智能',
+    'agent': 'ai agent', '智能体': 'ai agent',
+    '大模型': '大模型/llm', 'llm': '大模型/llm', '语言模型': '大模型/llm',
+    '医疗': 'ai+医疗', '医': 'ai+医疗', '健康': 'ai+医疗',
+    '教育': 'ai+教育',
+    '自动驾驶': '自动驾驶', '无人车': '自动驾驶', '驾驶': '自动驾驶',
+    '产品': '产品', 'pm': '产品经理', '产品经理': '产品经理',
+    '工程师': '工程师', '开发': '工程师', '技术': '工程师', '算法': '算法',
+    '创业': '创业', '创始人': '创始人', 'founder': '创始人', 'startup': '创业',
+    '投资': '投资', 'vc': '投资', '资本': '投资',
+    '学生': '在读', '高校': '大学', '学术': '大学', '博士': '博士', '硕士': '硕士',
+    '记者': '记者', '媒体': '记者',
+    '律师': '律师', '法律': '律师',
+    '设计': '设计', '游戏': '游戏',
+    '社区': '社区', '运营': '运营',
+  };
+
+  const words = query.replace(/[，。！？、]/g, ' ').split(/\s+/).filter(w => w.length > 0);
+  const keywords = new Set();
+
+  words.forEach(word => {
+    // Check direct map
+    Object.entries(keywordMap).forEach(([key, value]) => {
+      if (word.includes(key)) {
+        keywords.add(value.toLowerCase());
+      }
+    });
+    // Also add the raw word if it's meaningful (>1 char)
+    if (word.length > 1) {
+      keywords.add(word.toLowerCase());
+    }
+  });
+
+  return [...keywords];
+}
+
+function doMatch() {
+  const input = document.getElementById('matchInput').value.trim();
+  const resultsEl = document.getElementById('matchResults');
+
+  if (!input) {
+    resultsEl.innerHTML = '<div class="match-empty">请输入你想认识的人的描述</div>';
+    resultsEl.classList.add('visible');
+    return;
+  }
+
+  if (guests.length === 0) {
+    resultsEl.innerHTML = '<div class="match-loading">加载嘉宾数据中</div>';
+    resultsEl.classList.add('visible');
+    return;
+  }
+
+  // Score all guests
+  const scored = guests.map(g => {
+    const { score, reasons } = scoreGuest(g, input);
+    return { ...g, score, reasons };
+  }).filter(g => g.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  if (scored.length === 0) {
+    resultsEl.innerHTML = '<div class="match-empty">暂未匹配到合适的人选，试试换个描述？比如方向、角色或话题</div>';
+    resultsEl.classList.add('visible');
+    return;
+  }
+
+  resultsEl.innerHTML = scored.map((g, i) => `
+    <div class="result-card">
+      <div class="result-rank">${i + 1}</div>
+      <div class="result-title">${g.org}・${g.role}</div>
+      <div class="result-tags">
+        ${(g.interests || '').split(',').map(t => `<span class="result-tag">${t.trim()}</span>`).join('')}
+      </div>
+      <div class="result-reason">${g.bio}${g.topic ? '<div style="margin-top:8px;padding:8px 12px;background:var(--accent-bg);border-radius:8px;font-size:0.88rem;color:var(--text-secondary)"><strong style="color:var(--accent)">想聊：</strong>' + g.topic + '</div>' : ''}${g.reasons.length ? '<br><em style="color:var(--accent);font-size:0.82rem">匹配理由：' + g.reasons.join('、') + '</em>' : ''}</div>
+    </div>
+  `).join('');
+
+  resultsEl.classList.remove('visible');
+  void resultsEl.offsetWidth;
+  resultsEl.classList.add('visible');
+}
+
+// Enter key support
+document.getElementById('matchInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') doMatch();
+});
+
+// Load guests on page load
+loadGuests();
+</script>
+</body>
+</html>
