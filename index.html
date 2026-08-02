@@ -7,8 +7,15 @@
 <title>Coffee Break District · CBD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,800&family=Space+Mono:wght@400;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,800&amp;family=Space+Mono:wght@400;700&amp;family=ZCOOL+QingKe+HuangYou&amp;display=swap" rel="stylesheet">
 <style>
+@font-face{
+  font-family:"ZpixLocal";
+  src:url("./assets/fonts/zpix.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
 :root{
   --ink:#29241d;
   --ink-soft:#5f5448;
@@ -24,10 +31,15 @@
   --line-dark:rgba(255,244,223,.18);
   --serif:"Newsreader", Georgia, "Times New Roman", serif;
   --mono:"Space Mono", ui-monospace, monospace;
-  --pixel:"DotGothic16", "ZCOOL QingKe HuangYou", "Space Mono", "PingFang SC", "Microsoft YaHei", monospace;
+  --sans:"PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --pixel:"ZpixLocal", "DotGothic16", "ZCOOL QingKe HuangYou", "Space Mono", "PingFang SC", "Microsoft YaHei", monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  scroll-padding-top:0;
+}
 body{
   min-height:100vh;
   color:var(--ink);
@@ -71,6 +83,10 @@ button,a{touch-action:manipulation}
   opacity:.32;
   pointer-events:none;
   image-rendering:pixelated;
+  transition:opacity .28s ease;
+}
+body.join-active #character-rain{
+  opacity:0;
 }
 .site{
   position:relative;
@@ -87,8 +103,8 @@ button,a{touch-action:manipulation}
   padding:0 28px;
   color:var(--cream);
   border-bottom:1px solid rgba(255,244,223,.13);
-  background:linear-gradient(180deg,rgba(17,10,6,.78),rgba(17,10,6,.36));
-  backdrop-filter:blur(12px);
+  background:#100904;
+  backdrop-filter:none;
 }
 .brand{
   display:flex;
@@ -437,6 +453,7 @@ button,a{touch-action:manipulation}
 @keyframes spin{to{transform:rotate(360deg)}}
 .paper-section{
   position:relative;
+  min-height:100vh;
   padding:86px 24px;
   background:
     radial-gradient(circle at 70% 18%,rgba(215,110,45,.1),transparent 30%),
@@ -514,6 +531,7 @@ button,a{touch-action:manipulation}
 }
 .impact-section{
   position:relative;
+  min-height:100vh;
   padding:96px clamp(22px,6vw,84px);
   color:var(--cream);
   background:
@@ -586,8 +604,20 @@ button,a{touch-action:manipulation}
   font-size:12px;
   line-height:1.6;
 }
+.impact-section .section-title{
+  font-family:var(--pixel);
+  letter-spacing:0;
+  -webkit-font-smoothing:none;
+  text-rendering:optimizeSpeed;
+}
+.impact-card:nth-child(2) .impact-value{
+  font-family:var(--pixel);
+  -webkit-font-smoothing:none;
+  text-rendering:optimizeSpeed;
+}
 .why-section{
   position:relative;
+  min-height:100vh;
   padding:94px clamp(22px,6vw,84px);
   color:var(--cream);
   background:
@@ -608,7 +638,12 @@ button,a{touch-action:manipulation}
 }
 .why-statement em{
   color:var(--amber);
+  font-family:var(--sans);
+  font-weight:700;
   font-style:normal;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:auto;
 }
 .why-foot{
   max-width:660px;
@@ -618,8 +653,55 @@ button,a{touch-action:manipulation}
   font-size:14px;
   line-height:1.85;
 }
+.why-values{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:34px;
+}
+.why-value{
+  min-height:190px;
+  padding:20px 18px;
+  border:1px solid rgba(255,244,223,.15);
+  background:linear-gradient(160deg,rgba(255,244,223,.055),rgba(215,110,45,.04));
+  box-shadow:0 0 0 1px rgba(215,110,45,.05) inset;
+}
+.why-value strong{
+  display:block;
+  color:var(--amber);
+  font-family:var(--mono);
+  font-size:clamp(17px,1.55vw,23px);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:auto;
+}
+.why-value span{
+  display:block;
+  margin-top:8px;
+  color:rgba(255,244,223,.72);
+  font-family:var(--sans);
+  font-size:15px;
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:.08em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:auto;
+}
+.why-value p{
+  margin-top:14px;
+  color:rgba(255,244,223,.52);
+  font-family:var(--mono);
+  font-size:12px;
+  line-height:1.65;
+}
 .program-section{
   position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   padding:96px clamp(22px,6vw,84px);
   color:var(--ink);
   background:
@@ -633,8 +715,8 @@ button,a{touch-action:manipulation}
   margin-top:38px;
 }
 .program-card{
-  min-height:236px;
-  padding:22px 20px;
+  min-height:286px;
+  padding:26px 22px;
   border:1px solid rgba(41,36,29,.18);
   background:rgba(255,250,240,.48);
   box-shadow:0 18px 48px rgba(55,44,28,.08);
@@ -672,13 +754,21 @@ button,a{touch-action:manipulation}
 }
 .join-section{
   position:relative;
-  padding:96px clamp(22px,6vw,84px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:stretch;
+  min-height:100vh;
+  height:100vh;
+  padding:68px clamp(22px,6vw,84px) 56px;
   color:var(--cream);
   background:
     radial-gradient(circle at 50% 12%,rgba(215,110,45,.20),transparent 36%),
     linear-gradient(180deg,#050403,#160d07);
+  overflow:hidden;
 }
 .join-layout{
+  width:100%;
   display:grid;
   grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
   gap:44px;
@@ -763,8 +853,39 @@ button,a{touch-action:manipulation}
   font-size:13px;
   line-height:1.75;
 }
+.join-guide{
+  border-top:1px solid rgba(255,244,223,.14);
+}
+.guide-item{
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr);
+  gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,244,223,.14);
+}
+.guide-item strong{
+  color:var(--amber);
+  font-family:var(--mono);
+  font-size:12px;
+}
+.guide-item h3{
+  font-family:var(--pixel);
+  font-size:22px;
+  color:var(--cream);
+  font-weight:400;
+  -webkit-font-smoothing:none;
+  text-rendering:optimizeSpeed;
+}
+.guide-item p{
+  margin-top:8px;
+  color:rgba(255,244,223,.54);
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.65;
+}
 .voices-section{
   position:relative;
+  min-height:100vh;
   padding:96px clamp(22px,6vw,84px);
   color:var(--cream);
   background:
@@ -776,17 +897,75 @@ button,a{touch-action:manipulation}
   max-width:760px;
 }
 .voice-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-top:38px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:16px;
+  min-height:470px;
+  padding:34px 20px 56px;
+  perspective:1400px;
 }
+/* ── Fan card base ── */
 .voice-card{
-  min-height:270px;
-  padding:24px 22px;
-  border:1px solid rgba(255,244,223,.15);
-  background:linear-gradient(160deg,rgba(255,244,223,.06),rgba(215,110,45,.035));
-  box-shadow:0 24px 70px rgba(0,0,0,.22);
+  position:absolute;
+  width:clamp(200px,22vw,280px);
+  min-height:300px;
+  padding:20px 18px;
+  border:1px solid rgba(255,244,223,.24);
+  background:
+    linear-gradient(160deg,#211008 0%,#160b06 62%,#100804 100%);
+  box-shadow:0 24px 70px rgba(0,0,0,.40),0 0 0 1px rgba(240,162,75,.04) inset;
+  transform-origin:center 130%;
+  transition:transform .28s cubic-bezier(.22,.68,0,1.2), box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
+  will-change:transform;
+  backface-visibility:hidden;
+  cursor:default;
+}
+.voice-card.is-centered{cursor:pointer}
+/* fan positions: 5 visible cards, rest hidden */
+.voice-card:nth-child(n+6){ display:none }
+
+/* center */
+.voice-card:nth-child(1){
+  transform:rotate(0deg) translateY(0px);
+  z-index:10;
+  opacity:1;
+  border-color:rgba(240,162,75,.42);
+  box-shadow:0 32px 80px rgba(0,0,0,.50),0 0 40px rgba(215,110,45,.14);
+}
+/* 1 left */
+.voice-card:nth-child(2){
+  transform:rotate(-8deg) translateX(-86%) translateY(30px);
+  z-index:7;
+  opacity:.76;
+}
+/* 2 left */
+.voice-card:nth-child(3){
+  transform:rotate(-16deg) translateX(-166%) translateY(66px);
+  z-index:5;
+  opacity:.46;
+}
+/* 1 right */
+.voice-card:nth-child(4){
+  transform:rotate(8deg) translateX(86%) translateY(30px);
+  z-index:7;
+  opacity:.76;
+}
+/* 2 right */
+.voice-card:nth-child(5){
+  transform:rotate(16deg) translateX(166%) translateY(66px);
+  z-index:5;
+  opacity:.46;
+}
+/* hover lift */
+.voice-card:not(:nth-child(1)):hover{
+  z-index:9;
+  opacity:1;
+  box-shadow:0 32px 80px rgba(0,0,0,.50),0 0 28px rgba(215,110,45,.12);
+}
+.voice-card.is-centered{
+  border-color:rgba(240,162,75,.42);
 }
 .voice-mark{
   font-family:var(--pixel);
@@ -816,9 +995,45 @@ button,a{touch-action:manipulation}
   font-size:12px;
   line-height:1.7;
 }
+.voice-cloud{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:18px;
+  max-width:980px;
+}
+.voice-cloud span{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 12px;
+  border:1px solid rgba(255,244,223,.14);
+  border-radius:999px;
+  color:rgba(255,244,223,.70);
+  background:rgba(255,244,223,.045);
+  font-family:var(--mono);
+  font-size:12px;
+  line-height:1;
+  white-space:nowrap;
+}
+.voice-cloud .hot{
+  color:var(--amber);
+  border-color:rgba(240,162,75,.36);
+  background:rgba(215,110,45,.10);
+  text-shadow:0 0 14px rgba(215,110,45,.28);
+}
+.voice-cloud span:nth-child(3n){
+  font-size:13px;
+}
+.voice-cloud span:nth-child(4n){
+  opacity:.78;
+}
+.voice-cloud span:nth-child(5n){
+  transform:translateY(2px);
+}
 .film-section{
   position:relative;
-  min-height:78vh;
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:flex-start;
@@ -826,6 +1041,18 @@ button,a{touch-action:manipulation}
   padding:94px clamp(28px,6vw,84px);
   background:#050403;
   overflow:hidden;
+}
+.hero,
+.paper-section,
+.impact-section,
+.why-section,
+.program-section,
+.film-section,
+.voices-section,
+.join-section{
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  scroll-margin-top:0;
 }
 .film-section::before{
   content:"";
@@ -932,7 +1159,7 @@ button,a{touch-action:manipulation}
 .event-panel{
   position:relative;
   z-index:3;
-  width:min(500px,calc(100% - 48px));
+  width:min(620px,calc(100% - 48px));
   padding:0;
   color:var(--cream);
   background:transparent;
@@ -957,12 +1184,12 @@ button,a{touch-action:manipulation}
 }
 .event-list{
   margin-top:26px;
-  max-width:460px;
+  max-width:620px;
   border-top:1px solid rgba(255,244,223,.20);
 }
 .event-item{
   display:grid;
-  grid-template-columns:112px minmax(0,1fr) auto;
+  grid-template-columns:118px minmax(0,1fr) auto;
   gap:16px;
   align-items:start;
   padding:16px 0;
@@ -975,8 +1202,16 @@ button,a{touch-action:manipulation}
   font-size:12px;
 }
 .event-name{
+  display:block;
   font-size:14px;
   line-height:1.45;
+}
+.event-desc{
+  display:block;
+  margin-top:6px;
+  color:rgba(255,244,223,.46);
+  font-size:12px;
+  line-height:1.55;
 }
 .event-link{
   color:var(--cream);
@@ -990,6 +1225,14 @@ button,a{touch-action:manipulation}
   justify-content:flex-end;
   white-space:nowrap;
 }
+.event-status{
+  display:inline-flex;
+  padding:4px 8px;
+  border:1px solid rgba(255,244,223,.18);
+  color:rgba(255,244,223,.58);
+  font-size:11px;
+  line-height:1;
+}
 .event-panel .btn{margin-top:28px}
 .reveal{
   opacity:0;
@@ -998,6 +1241,19 @@ button,a{touch-action:manipulation}
 }
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:900px){
+  .voice-grid{
+    min-height:420px;
+    padding:60px 10px 40px;
+  }
+  .voice-card{
+    width:clamp(180px,44vw,240px);
+    min-height:260px;
+    padding:16px 14px;
+  }
+  .voice-card:nth-child(2){transform:rotate(-10deg) translateX(-62%) translateY(24px)}
+  .voice-card:nth-child(3){transform:rotate(-20deg) translateX(-118%) translateY(54px)}
+  .voice-card:nth-child(4){transform:rotate(10deg) translateX(62%) translateY(24px)}
+  .voice-card:nth-child(5){transform:rotate(20deg) translateX(118%) translateY(54px)}
   .nav{height:58px;padding:0 16px}
   .brand{font-size:18px}
   .brand-mark{width:32px;height:32px}
@@ -1106,12 +1362,12 @@ button,a{touch-action:manipulation}
     font-size:13px;
     line-height:1.7;
   }
-  .impact-grid,.program-grid{
+  .impact-grid,.program-grid,.why-values{
     grid-template-columns:1fr;
     gap:12px;
     margin-top:28px;
   }
-  .impact-card,.program-card{
+  .impact-card,.program-card,.why-value{
     min-height:auto;
     padding:20px 18px;
   }
@@ -1122,16 +1378,7 @@ button,a{touch-action:manipulation}
     grid-template-columns:1fr;
     gap:34px;
   }
-  .voice-grid{
-    grid-template-columns:1fr;
-  }
-  .voice-card{
-    min-height:auto;
-    padding:22px 18px;
-  }
-  .voice-card p{
-    font-size:19px;
-  }
+  /* voice grid handled in fan section above */
   .join-step{
     grid-template-columns:1fr;
     gap:8px;
@@ -1185,6 +1432,382 @@ button,a{touch-action:manipulation}
     gap:12px;
   }
 }
+@media(max-width:640px){
+  html{
+    height:100%;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+    scroll-padding-top:48px;
+  }
+  #character-rain{
+    display:none;
+  }
+  .hero,
+  .paper-section,
+  .impact-section,
+  .why-section,
+  .program-section,
+  .film-section,
+  .voices-section,
+  .join-section{
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    scroll-margin-top:0;
+  }
+  .nav{
+    height:48px;
+    padding:0 14px;
+    background:#100904;
+  }
+  .brand{
+    gap:7px;
+    font-size:15px;
+  }
+  .brand-mark{
+    width:26px;
+    height:26px;
+  }
+  .call{
+    font-size:12px;
+  }
+  .hero,
+  .hero-copy{
+    height:var(--snap-vh, 100dvh);
+    min-height:var(--snap-vh, 100dvh);
+    max-height:var(--snap-vh, 100dvh);
+  }
+  .hero-main{
+    top:8dvh;
+    width:90vw;
+  }
+  .hero h1{
+    font-size:clamp(38px,13vw,58px);
+  }
+  .hero-sub{
+    position:absolute;
+    left:0;
+    top:64dvh;
+    margin-top:0;
+    padding:0;
+    font-size:14px;
+    max-width:230px;
+    opacity:.78;
+    background:none;
+    text-shadow:0 2px 14px rgba(0,0,0,.82),0 0 12px rgba(215,110,45,.20);
+  }
+  .hero-actions{
+    position:absolute;
+    left:0;
+    top:72dvh;
+    margin-top:0;
+  }
+  .hero-link{
+    padding:0;
+    font-size:11px;
+    max-width:230px;
+    line-height:1.35;
+    background:none;
+    text-shadow:0 2px 14px rgba(0,0,0,.82),0 0 12px rgba(215,110,45,.25);
+  }
+  .hero-link::after{
+    width:42px;
+  }
+  .hero-builder,
+  .hero-join,
+  .swipe{
+    display:none;
+  }
+  .film-column{
+    height:104px;
+    bottom:10px;
+    padding:10px 18px;
+  }
+  .film-frame{
+    min-width:118px;
+  }
+  .paper-section{
+    height:var(--snap-vh, 100dvh);
+    min-height:var(--snap-vh, 100dvh);
+    max-height:var(--snap-vh, 100dvh);
+    padding:56px 10px 34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .paper{
+    width:100%;
+    padding:22px 14px 24px;
+  }
+  .paper-title{
+    font-size:clamp(34px,11vw,50px);
+    line-height:.92;
+  }
+  .paper-sub{
+    margin-top:16px;
+    font-size:10px;
+  }
+  .columns{
+    gap:15px;
+    margin-top:24px;
+  }
+  .column h3{
+    font-size:17px;
+  }
+  .column p{
+    font-size:13px;
+    line-height:1.38;
+  }
+  .impact-section,
+  .why-section,
+  .program-section,
+  .film-section,
+  .join-section,
+  .voices-section{
+    height:var(--snap-vh, 100dvh);
+    min-height:var(--snap-vh, 100dvh);
+    max-height:var(--snap-vh, 100dvh);
+    padding:72px 14px 24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    overflow:hidden;
+  }
+  .impact-section{
+    justify-content:center;
+    padding-top:58px;
+    padding-bottom:38px;
+  }
+  .why-section{
+    justify-content:center;
+    padding-top:58px;
+    padding-bottom:36px;
+  }
+  .voices-section{
+    justify-content:center;
+    overflow:hidden;
+  }
+  .section-label{
+    margin-bottom:10px;
+    font-size:10px;
+  }
+  .section-title{
+    font-size:clamp(26px,8.4vw,38px);
+    line-height:1;
+  }
+  .section-copy,
+  .why-foot,
+  .event-panel p{
+    margin-top:12px;
+    font-size:12px;
+    line-height:1.55;
+  }
+  .impact-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-top:20px;
+  }
+  .program-grid,
+  .why-values{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-top:14px;
+  }
+  .why-values{
+    gap:12px;
+    margin-top:22px;
+  }
+  .impact-card,
+  .program-card,
+  .why-value,
+  .voice-card{
+    padding:12px 11px;
+  }
+  .impact-card{
+    min-height:176px;
+    padding:16px 12px;
+  }
+  .why-value{
+    min-height:84px;
+    padding:16px 13px;
+  }
+  .impact-value{
+    font-size:clamp(24px,7.4vw,32px);
+  }
+  .impact-name{
+    margin-top:8px;
+    font-size:14px;
+  }
+  .impact-note,
+  .why-value p,
+  .event-desc{
+    font-size:10.5px;
+    line-height:1.4;
+  }
+  .why-statement{
+    margin-top:16px;
+    font-size:clamp(21px,6vw,28px);
+    line-height:1.2;
+  }
+  .why-foot{
+    display:none;
+  }
+  .why-value strong{
+    font-size:15px;
+  }
+  .why-value span{
+    margin-top:5px;
+    font-size:12px;
+  }
+  .why-value p{
+    display:none;
+  }
+  .program-card h3,
+  .join-step h3,
+  .faq-item h3,
+  .guide-item h3{
+    font-size:16px;
+  }
+  .program-card p{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    margin-top:8px;
+    font-size:11.5px;
+    line-height:1.35;
+  }
+  .program-status,
+  .event-status{
+    margin-top:10px;
+    font-size:10px;
+  }
+  .film-section{
+    height:calc(100svh - 48px);
+    min-height:calc(100svh - 48px);
+    max-height:calc(100svh - 48px);
+    height:calc(100dvh - 48px);
+    min-height:calc(100dvh - 48px);
+    max-height:calc(100dvh - 48px);
+  }
+  .film-column--event{
+    display:none;
+  }
+  .film-column--event .film-frame{
+    min-height:0;
+    height:calc(25% - 8px);
+    margin-bottom:8px;
+  }
+  .event-panel{
+    width:100%;
+    padding:0;
+  }
+  .event-panel h2{
+    font-size:26px;
+  }
+  .event-list{
+    margin-top:12px;
+  }
+  .event-item{
+    grid-template-columns:76px minmax(0,1fr);
+    gap:8px 10px;
+    padding:8px 0;
+  }
+  .event-name{
+    font-size:12px;
+  }
+  .event-desc{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .event-actions,
+  .event-status{
+    grid-column:2;
+  }
+  .voice-grid{
+    min-height:318px;
+    padding:24px 4px 30px;
+    perspective:900px;
+  }
+  .voice-card{
+    width:clamp(168px,52vw,206px);
+    min-height:220px;
+    padding:14px 13px;
+    transition:transform .26s cubic-bezier(.22,.68,0,1.2), box-shadow .2s ease, border-color .2s ease;
+  }
+  /* 3-card fan on mobile */
+  .voice-card:nth-child(3){ display:none }
+  .voice-card:nth-child(5){ display:none }
+  .voice-card:nth-child(2){ transform:rotate(-10deg) translateX(-96%) translateY(28px) }
+  .voice-card:nth-child(4){ transform:rotate(10deg)  translateX(96%)  translateY(28px) }
+  .voice-mark{
+    font-size:28px;
+    line-height:.8;
+  }
+  .voice-card p{
+    margin-top:14px;
+    font-size:14px;
+    line-height:1.38;
+  }
+  .voice-meta{
+    margin-top:10px;
+    padding-top:8px;
+    font-size:10px;
+  }
+  .join-layout{
+    gap:12px;
+  }
+  .join-steps{
+    margin-top:18px;
+    gap:6px;
+  }
+  .join-step{
+    padding:12px 0;
+  }
+  .join-step p,
+  .join-cta,
+  .faq-item p,
+  .guide-item p{
+    font-size:12px;
+    line-height:1.55;
+  }
+  .faq-item{
+    padding:12px 0;
+  }
+  .join-guide{
+    border-top:0;
+  }
+  .guide-item{
+    grid-template-columns:34px minmax(0,1fr);
+    gap:10px;
+    padding:10px 0;
+  }
+  .guide-item strong{
+    font-size:10px;
+  }
+  .guide-item p{
+    margin-top:4px;
+  }
+  .join-cta{
+    margin-top:12px;
+    padding-top:10px;
+  }
+  .join-cta a{
+    margin-top:8px;
+  }
+  .join-guide{
+    display:grid;
+    gap:7px;
+  }
+  .guide-item{
+    border:1px solid rgba(255,244,223,.12);
+    padding:10px;
+  }
+}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
@@ -1194,7 +1817,7 @@ button,a{touch-action:manipulation}
 <canvas id="character-rain" aria-hidden="true"></canvas>
 <div class="site">
   <header class="nav">
-    <a class="brand" href="#top" aria-label="Coffee Break District 首页"><img class="brand-mark" src="./cbd-logo-cutout.png" alt="" />CBD</a>
+    <a class="brand" href="#top" aria-label="Coffee Break District 首页"><img class="brand-mark" src="./cbd-logo-cutout.png?v=20260729-logo" alt="" />CBD</a>
     <nav class="nav-links" aria-label="主导航">
       <a href="#top">Home</a>
       <a href="#why">About</a>
@@ -1203,7 +1826,7 @@ button,a{touch-action:manipulation}
       <a href="#voices">Voices</a>
       <a href="#join">Join</a>
     </nav>
-    <a class="call" href="#join">☎ Join CBD</a>
+    <a class="call" href="https://my.feishu.cn/wiki/MKbAw4iRbiP59EkaNzdcoAbtnEh" target="_blank" rel="noopener">☎ Join CBD</a>
   </header>
 
   <main id="top">
@@ -1220,8 +1843,7 @@ button,a{touch-action:manipulation}
         </div>
       </div>
       <div class="hero-builder">
-        <h3>Start a new circle</h3>
-        <span>For internet people discussing AI, careers, and what changes next.</span>
+        <span>For people navigating insights, careers, and life in the AI era.</span>
       </div>
       <div class="hero-join">
         <div class="small">Find your</div>
@@ -1290,12 +1912,34 @@ button,a{touch-action:manipulation}
     <section class="why-section" id="why">
       <div class="why-inner reveal">
         <div class="section-label">Why CBD</div>
-        <h2 class="section-title">为什么需要一个线下讨论 AI 的职场社群</h2>
+        <h2 class="section-title">为什么是 Coffee Break District</h2>
         <p class="why-statement">
-          AI 正在重写每一份工作的规则。<br>
-          有人焦虑，有人观望，<em>我们更想把不确定变成可以讨论、可以行动的机会。</em>
+          泛 AI、PM、00 后新一代职场人，<br>
+          <em>在这把想法、资源和行动链接到一起。</em>
         </p>
-        <p class="why-foot">CBD 不想做一个只刷屏的群。我们希望把零散讨论整理成可回看的经验，把一闪而过的灵感留存下来，也让每一次提问和回答都能帮到同行的人。</p>
+        <p class="why-foot">CBD 不只是一次活动，也不想做一个只刷屏的群。我们更像一个持续生长的共创场：投资人、创业者、产品经理、技术人才和新一代职场人一起学习分享，把线上资源、线下面聊和真实项目连接起来。</p>
+        <div class="why-values" aria-label="CBD 社群关键词">
+          <article class="why-value">
+            <strong>Co-build</strong>
+            <span>多元共创</span>
+            <p>投资人、创业者、产品经理、技术人才一起学习分享，不只交换名片，也一起深耕共建。</p>
+          </article>
+          <article class="why-value">
+            <strong>Celerity</strong>
+            <span>灵敏迭代</span>
+            <p>线上做资源链接，线下用 coffee chat 面聊，把想法、机会和合作快速对接落地。</p>
+          </article>
+          <article class="why-value">
+            <strong>Creactivity</strong>
+            <span>勇敢创新</span>
+            <p>关注前沿 AI 赛道，勇攀高峰，也勇立潮头；敢于创造，敢为人先。</p>
+          </article>
+          <article class="why-value">
+            <strong>Common-value</strong>
+            <span>共生价值</span>
+            <p>不把社群做成单向获取，而是让圈层共赢、构筑共识，在持续连接里同生共长。</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1315,8 +1959,8 @@ button,a{touch-action:manipulation}
         <article class="program-card">
           <div class="program-no">02 / ROUNDTABLE</div>
           <h3>主题圆桌</h3>
-          <p>围绕 AI 产品、增长、内容、组织变化等话题做小范围深聊，不追热点，追真实判断。</p>
-          <span class="program-status">筹备中</span>
+          <p>已办四场清北线下讲座与线上圆桌，与北大创协、清华国际生交流协会合作紧密，曾承办黑客松、Tedx、青年创业求职论坛等活动，邀请出海企业CEO、百万职场博主、18年大厂AI高管等分享经验</p>
+          <span class="program-status">持续组织</span>
         </article>
         <article class="program-card">
           <div class="program-no">03 / AFTER PARTY</div>
@@ -1342,14 +1986,46 @@ button,a{touch-action:manipulation}
       </aside>
       <aside class="event-panel reveal">
         <h2>Offline moments,<br>kept small.</h2>
-        <p>CBD 会持续组织线下活动：coffee chat、主题圆桌、after party，以及筹备中的产品吐槽开放麦。</p>
-        <div class="event-list" aria-label="已举办活动">
+        <p>CBD 会持续组织线下活动：coffee chat、高校圆桌、前辈分享、after party，这些连接都在慢慢累积。</p>
+        <div class="event-list" aria-label="活动列表">
+          <div class="event-item">
+            <span class="event-date">筹备中</span>
+            <span class="event-copy">
+              <span class="event-name">CBD 分享会第四期 · 互联网前辈分享</span>
+              <span class="event-desc">邀请 AI 产品专家、头部电商市场负责人、BAT 运营经理、AI 产品负责人/面试官分享经验。</span>
+            </span>
+            <span class="event-status">问卷收集中</span>
+          </div>
           <div class="event-item">
             <span class="event-date">2026.07.19 周日</span>
-            <span class="event-name">WAIC After Party</span>
+            <span class="event-copy">
+              <span class="event-name">WAIC After Party</span>
+              <span class="event-desc">大会结束后继续聊，把短暂相遇变成更自然的线下连接。</span>
+            </span>
             <span class="event-actions">
               <a class="event-link" href="./cbd_waic_party.html">Event page</a>
               <a class="event-link" href="./waic-after-party-recap.html">Recap article</a>
+            </span>
+          </div>
+          <div class="event-item">
+            <span class="event-date">2026.05.22</span>
+            <span class="event-copy">
+              <span class="event-name">青年创业论坛 · 出海专场</span>
+              <span class="event-desc">联合高校创业组织，围绕 AI 时代的出海机会、产品增长和跨境资源做分享讨论。</span>
+            </span>
+          </div>
+          <div class="event-item">
+            <span class="event-date">2026.02.01</span>
+            <span class="event-copy">
+              <span class="event-name">AI 小饭局</span>
+              <span class="event-desc">第一场 AI 小饭局圆满结束，在交流中加强对AI的理解和运用边界。</span>
+            </span>
+          </div>
+          <div class="event-item">
+            <span class="event-date">2026.01.31</span>
+            <span class="event-copy">
+              <span class="event-name">大厂 15 年+ 工作经验 PM 分享</span>
+              <span class="event-desc">邀请资深产品前辈分享 AI 产品、职业判断和产品经理成长经验。</span>
             </span>
           </div>
         </div>
@@ -1378,6 +2054,41 @@ button,a{touch-action:manipulation}
           <p>这个社群真的挺好的，是我目前看消息最多的一个群。</p>
           <div class="voice-meta">群友反馈 · 脱敏摘录</div>
         </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>有时候下班已经很累了，但看到群里在聊 AI 产品、求职和项目，还是会忍不住点进去看。</p>
+          <div class="voice-meta">日常聊天 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>比起只看公众号总结，我更喜欢这里有人把自己的判断和踩坑讲出来，信息会更具体。</p>
+          <div class="voice-meta">群友反馈 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>线下见过一次之后，再回到群里聊天就不一样了，会更愿意接话，也更敢问问题。</p>
+          <div class="voice-meta">线下活动后 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>我觉得 CBD 最好的地方是没有那么端着，大家可以认真聊职业，也可以很自然地互相介绍资源。</p>
+          <div class="voice-meta">群友反馈 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>每次有人抛一个问题，后面总会接出好几条不同视角，对我判断行业变化挺有帮助的。</p>
+          <div class="voice-meta">日常聊天 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>不是那种只发广告的群，更多是有人在认真分享自己最近看到的机会、困惑和尝试。</p>
+          <div class="voice-meta">群友反馈 · 脱敏摘录</div>
+        </article>
+        <article class="voice-card">
+          <div class="voice-mark">"</div>
+          <p>参加完活动之后会觉得，原来很多人都在面对类似的问题，只是平时没有地方摊开聊。</p>
+          <div class="voice-meta">线下活动后 · 脱敏摘录</div>
+        </article>
       </div>
     </section>
 
@@ -1387,37 +2098,23 @@ button,a{touch-action:manipulation}
           <div class="section-label">Join CBD</div>
           <h2 class="section-title">认真面对 AI 时代的人，值得有一群同行者</h2>
           <p class="section-copy">我们希望新成员不是来围观，而是愿意提出问题、分享经验、参与线下连接的人。</p>
-          <div class="join-steps">
-            <div class="join-step">
-              <strong>STEP 01</strong>
-              <div><h3>先了解 CBD</h3><p>看完官网、活动归档、回顾文章和 One Pager，确认这个社群是否适合你。</p></div>
-            </div>
-            <div class="join-step">
-              <strong>STEP 02</strong>
-              <div><h3>报名参与活动</h3><p>先从 coffee chat、主题圆桌或线下活动开始认识真实的人。</p></div>
-            </div>
-            <div class="join-step">
-              <strong>STEP 03</strong>
-              <div><h3>进入长期连接</h3><p>在持续讨论和线下见面中，找到同频的人、问题和机会。</p></div>
-            </div>
-          </div>
           <div class="join-cta">
             <p>想加入或了解更多，可以先看这份 One Pager；也可以加小助手（VX: BestMentor_Momo）备注 CBD。</p>
             <a href="https://my.feishu.cn/wiki/MKbAw4iRbiP59EkaNzdcoAbtnEh" target="_blank" rel="noopener">Read the One Pager</a>
           </div>
         </div>
-        <div class="faq-list reveal" aria-label="常见问题">
-          <div class="faq-item">
-            <h3>CBD 是什么？</h3>
-            <p>CBD 是一个讨论 AI 的互联网职场社群，成员来自产品、运营、技术、设计、投资、创业等不同背景。</p>
+        <div class="join-guide reveal" aria-label="加入路径与常见问题">
+          <div class="guide-item">
+            <strong>01</strong>
+            <div><h3>CBD 是什么？</h3><p>讨论 AI+职场的互联网社群，成员来自产品、运营、技术、设计、投资、创业等背景。</p></div>
           </div>
-          <div class="faq-item">
-            <h3>现在主要做什么？</h3>
-            <p>目前重点是线下连接和主题讨论：coffee chat、主题圆桌、after party，以及筹备中的产品吐槽开放麦。</p>
+          <div class="guide-item">
+            <strong>02</strong>
+            <div><h3>现在主要做什么？</h3><p>线下连接和主题讨论：coffee chat、高校圆桌、前辈分享、after party。</p></div>
           </div>
-          <div class="faq-item">
-            <h3>如何加入？</h3>
-            <p>先看 One Pager 了解 CBD 的社群口径和参与方式；也可以加小助手（VX: BestMentor_Momo）备注 CBD。</p>
+          <div class="guide-item">
+            <strong>03</strong>
+            <div><h3>如何加入？</h3><p>先看 One Pager；也可以加小助手（VX: BestMentor_Momo）备注 CBD。</p></div>
           </div>
         </div>
       </div>
@@ -1512,8 +2209,11 @@ button,a{touch-action:manipulation}
 
   function resizeOrb(){
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.max(1, rect.width || window.innerWidth);
+    const height = Math.max(1, rect.height || window.innerHeight);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
     gl.viewport(0,0,canvas.width,canvas.height);
   }
   window.addEventListener('resize', resizeOrb);
@@ -1535,6 +2235,8 @@ let columns = 0;
 let drops = [];
 let fontSize = 15;
 
+let _rainResizeTimer;
+let _lastRainWidth = window.innerWidth;
 function resizeRain(){
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   canvas.width = Math.floor(window.innerWidth * dpr);
@@ -1546,10 +2248,19 @@ function resizeRain(){
   columns = Math.ceil(window.innerWidth / fontSize);
   drops = Array.from({length: columns}, () => Math.random() * window.innerHeight / fontSize);
 }
-window.addEventListener('resize', resizeRain);
+window.addEventListener('resize', () => {
+  const w = window.innerWidth;
+  /* iOS 地址栏收起只改高度，宽度不变时跳过全量重建，避免闪烁 */
+  if (w !== _lastRainWidth) {
+    _lastRainWidth = w;
+    clearTimeout(_rainResizeTimer);
+    _rainResizeTimer = setTimeout(resizeRain, 120);
+  }
+});
 resizeRain();
 
 function rain(){
+  if(window.innerWidth < 641) return;
   ctx.fillStyle = 'rgba(10, 7, 4, 0.08)';
   ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
   ctx.font = `${fontSize}px Space Mono, monospace`;
@@ -1568,6 +2279,199 @@ function rain(){
   requestAnimationFrame(rain);
 }
 rain();
+
+function setupVoiceCarousel(){
+  const track = document.querySelector('.voice-grid');
+  if(!track) return;
+  const cards = Array.from(track.querySelectorAll('.voice-card'));
+  const total = cards.length;
+  if(!total) return;
+
+  /* logical order: 0=center, 1=L1, 2=L2, 3=R1, 4=R2
+     mapped from DOM children by rotation index             */
+  let focusIdx = 0; /* which DOM card is currently "center" */
+
+  function applyFan(){
+    const isMobile = window.matchMedia('(max-width:640px)').matches;
+    cards.forEach((card, domIdx) => {
+      const pos = ((domIdx - focusIdx) % total + total) % total;
+      /* map pos → slot: 0=center,1=L1,2=L2,3=R1,4=R2 */
+      const slot = pos <= 2 ? pos : total - pos;
+      const side = pos === 0 ? 0 : pos <= 2 ? -1 : 1;
+      const hidden = isMobile && Math.abs(side) === 2;
+
+      const rot   = side * slot * (isMobile ? 10 : 8);
+      const tx    = side * slot * (isMobile ? 96 : 108);
+      const ty    = slot === 0 ? 0 : slot * (isMobile ? 28 : 32);
+      const z     = 10 - slot * 3;
+      const op    = slot === 0 ? 1 : 1 - slot * (isMobile ? 0.42 : 0.27);
+
+      card.style.transform = `rotate(${rot}deg) translateX(${tx}%) translateY(${ty}px)`;
+      card.style.zIndex = String(z);
+      card.style.opacity = op.toFixed(2);
+      card.style.display = hidden ? 'none' : 'block';
+      card.classList.toggle('is-centered', slot === 0);
+    });
+  }
+
+  function rotateTo(domIdx){
+    focusIdx = ((domIdx % total) + total) % total;
+    applyFan();
+  }
+
+  /* click the centered card → move to the next voice */
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      if(card.classList.contains('is-centered')) rotateTo(focusIdx + 1);
+    });
+  });
+
+  const voicesSection = track.closest('.voices-section');
+  const isVoiceSectionActive = () => {
+    if(!voicesSection) return false;
+    const rect = voicesSection.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.52 && rect.bottom > window.innerHeight * 0.48;
+  };
+
+  window.addEventListener('keydown', (event) => {
+    const target = event.target;
+    const tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+    if(tag === 'input' || tag === 'textarea' || tag === 'select' || target?.isContentEditable) return;
+    if(!isVoiceSectionActive()) return;
+
+    if(event.key === 'ArrowLeft'){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      rotateTo(focusIdx - 1);
+    }else if(event.key === 'ArrowRight'){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      rotateTo(focusIdx + 1);
+    }
+  }, true);
+
+  window.addEventListener('resize', applyFan);
+  applyFan();
+}
+setupVoiceCarousel();
+
+function setupSnapViewport(){
+  let lastWidth = window.innerWidth;
+  const setHeight = () => {
+    const viewport = window.visualViewport;
+    const height = viewport ? viewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--snap-vh', `${Math.round(height)}px`);
+    lastWidth = window.innerWidth;
+  };
+  let resizeTimer = null;
+  const schedule = () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(setHeight, 120);
+  };
+  setHeight();
+  window.addEventListener('resize', () => {
+    if(Math.abs(window.innerWidth - lastWidth) > 24) schedule();
+  }, { passive:true });
+  window.addEventListener('orientationchange', schedule, { passive:true });
+  window.addEventListener('pageshow', schedule, { passive:true });
+}
+setupSnapViewport();
+
+function setupSectionPager(){
+  const sections = Array.from(document.querySelectorAll('.hero, .paper-section, .impact-section, .why-section, .program-section, .film-section, .voices-section, .join-section'));
+  if(!sections.length) return;
+  const joinSection = document.querySelector('.join-section');
+  let locked = false;
+  let touchY = null;
+  let touchX = null;
+
+  const nearestIndex = () => {
+    const y = window.scrollY;
+    return sections.reduce((best, section, index) => {
+      const dist = Math.abs(targetTop(section) - y);
+      return dist < best.dist ? { index, dist } : best;
+    }, { index:0, dist:Infinity }).index;
+  };
+
+  const topOffset = () => {
+    if(!window.matchMedia('(max-width:640px)').matches) return 0;
+    return document.querySelector('.nav')?.offsetHeight || 48;
+  };
+
+  const targetTop = (section) => Math.max(0, section.offsetTop - topOffset());
+
+  const go = (direction) => {
+    if(locked) return;
+    const next = Math.max(0, Math.min(sections.length - 1, nearestIndex() + direction));
+    locked = true;
+    window.scrollTo({ top:targetTop(sections[next]), behavior:'smooth' });
+    window.setTimeout(() => { locked = false; updateJoinState(); }, 620);
+  };
+
+  const goTo = (index) => {
+    if(locked) return;
+    const next = Math.max(0, Math.min(sections.length - 1, index));
+    locked = true;
+    window.scrollTo({ top:targetTop(sections[next]), behavior:'smooth' });
+    window.setTimeout(() => { locked = false; updateJoinState(); }, 620);
+  };
+
+  const updateJoinState = () => {
+    if(!joinSection) return;
+    const rect = joinSection.getBoundingClientRect();
+    const active = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+    document.body.classList.toggle('join-active', active);
+  };
+
+  window.addEventListener('wheel', (event) => {
+    if(event.target.closest && event.target.closest('.voice-grid')) return;
+    if(Math.abs(event.deltaY) < 18) return;
+    event.preventDefault();
+    go(event.deltaY > 0 ? 1 : -1);
+  }, { passive:false });
+
+  window.addEventListener('keydown', (event) => {
+    const target = event.target;
+    const tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+    if(tag === 'input' || tag === 'textarea' || tag === 'select' || target?.isContentEditable) return;
+    if(event.target.closest && event.target.closest('.voice-grid')) return;
+
+    if(event.key === 'ArrowDown' || event.key === 'PageDown' || event.key === ' '){
+      event.preventDefault();
+      go(1);
+    }else if(event.key === 'ArrowUp' || event.key === 'PageUp'){
+      event.preventDefault();
+      go(-1);
+    }else if(event.key === 'Home'){
+      event.preventDefault();
+      goTo(0);
+    }else if(event.key === 'End'){
+      event.preventDefault();
+      goTo(sections.length - 1);
+    }
+  });
+
+  window.addEventListener('touchstart', (event) => {
+    if(event.target.closest && event.target.closest('.voice-grid')) return;
+    touchX = event.touches[0].clientX;
+    touchY = event.touches[0].clientY;
+  }, { passive:true });
+
+  window.addEventListener('touchend', (event) => {
+    if(touchY === null || touchX === null) return;
+    if(event.target.closest && event.target.closest('.voice-grid')) return;
+    const dx = event.changedTouches[0].clientX - touchX;
+    const dy = event.changedTouches[0].clientY - touchY;
+    touchX = null;
+    touchY = null;
+    if(Math.abs(dy) < 46 || Math.abs(dy) < Math.abs(dx) * 1.2) return;
+    go(dy < 0 ? 1 : -1);
+  }, { passive:true });
+  window.addEventListener('scroll', updateJoinState, { passive:true });
+  window.addEventListener('resize', updateJoinState, { passive:true });
+  updateJoinState();
+}
+setupSectionPager();
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {

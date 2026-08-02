@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CBD × WAIC 2026 After Party</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@500;600;700;900&amp;display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -888,6 +891,102 @@ body {
   .hero h1 {
     font-size: 1.86rem;
     letter-spacing: -0.06em;
+  }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 12px; }
+  .hero { padding: 34px 10px 26px; }
+  .hero::after { height: 210px; }
+  .hero-eyebrow {
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+  .hero h1 {
+    max-width: 340px;
+    margin: 0 auto 10px;
+    font-size: clamp(1.65rem, 7.4vw, 2.05rem);
+    line-height: 1.02;
+  }
+  .hero-subtitle {
+    max-width: 300px;
+    margin-bottom: 12px;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+  .hero-actions {
+    margin-bottom: 16px;
+  }
+  .hero-link {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+  }
+  .hero-banner {
+    margin-bottom: 18px;
+  }
+  .hero-stats {
+    max-width: 300px;
+  }
+  .stat-value { font-size: 1.32rem; }
+  .stat-label { font-size: 0.66rem; }
+  .from-section,
+  .interests-section,
+  .match-section {
+    padding: 34px 10px;
+  }
+  .section-header {
+    margin-bottom: 20px;
+  }
+  .section-header h2 {
+    font-size: 1.32rem;
+  }
+  .section-header p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+  .tag-group {
+    margin-bottom: 16px;
+  }
+  .interest-cell {
+    padding: 14px 10px;
+  }
+  .interest-number { font-size: 1.32rem; }
+  .match-input {
+    padding: 12px 14px;
+    padding-right: 76px;
+    font-size: 0.82rem;
+  }
+  .result-card {
+    padding: 14px;
+  }
+  .cta-section {
+    padding: 36px 12px 52px;
+  }
+  .cta-section h2 {
+    font-size: 1.24rem;
+  }
+  .cta-section p {
+    margin-bottom: 18px;
+    font-size: 0.8rem;
+  }
+  .signup-steps {
+    gap: 10px;
+    margin: 18px auto 12px;
+  }
+  .signup-card {
+    padding: 16px;
+  }
+  .mini-program-qr {
+    width: min(138px, 54vw);
+  }
+  .fee-note {
+    padding: 12px;
+  }
+  .cta-btn {
+    padding: 12px 24px;
+    font-size: 0.88rem;
+  }
+  .footer {
+    padding: 18px 12px;
   }
 }
 </style>
