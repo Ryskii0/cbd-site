@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CBD Share · 内容审核</title>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <style>
+    body{min-height:100vh}.admin-shell{max-width:1220px;margin:0 auto;padding:36px 32px}.admin-head{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:24px}.admin-head h1{font-size:38px;letter-spacing:-.05em;margin:8px 0 0}.admin-head p{color:var(--muted);margin:0}.admin-link{border:1px solid var(--ink);border-radius:6px;padding:10px 14px}.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}.admin-stat{background:#fff;border:1px solid var(--line);border-radius:7px;padding:18px}.admin-stat span{display:block;color:var(--muted);font-size:12px}.admin-stat strong{display:block;font-size:28px;margin-top:3px}.admin-toolbar{display:flex;gap:10px;margin-bottom:14px}.admin-toolbar button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:9px 13px;cursor:pointer}.admin-toolbar button.active{background:var(--ink);color:#fff;border-color:var(--ink)}.admin-list{display:grid;gap:12px}.admin-card{background:#fff;border:1px solid var(--line);border-radius:7px;padding:20px}.admin-card-top{display:flex;justify-content:space-between;gap:16px}.admin-card h2{font-size:19px;margin:7px 0}.admin-card p{white-space:pre-line;color:#51463f;line-height:1.75;margin:10px 0}.admin-meta{color:var(--muted);font-size:12px}.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.admin-actions button{border:0;border-radius:5px;padding:9px 12px;cursor:pointer;background:var(--ink);color:#fff}.admin-actions button.reject{background:#f5e6dc;color:#8b3e19}.admin-actions button.archive{background:#f2eee9;color:#66584f}.status-pill{font-size:11px;padding:4px 8px;border-radius:99px;background:#fff0d4;color:#99530a;height:max-content}.empty-admin{padding:70px;text-align:center;color:var(--muted);border:1px dashed #d8c9bd;border-radius:7px}.empty-admin strong{display:block;color:var(--ink);font-size:18px;margin-bottom:8px}@media(max-width:700px){.admin-shell{padding:24px 16px}.admin-head{display:block}.admin-link{display:inline-block;margin-top:16px}.admin-stats{grid-template-columns:1fr}.admin-card-top{display:block}}
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <header class="admin-head">
+      <div>
+        <p class="eyebrow">CBD · SHARE ADMIN</p>
+        <h1>内容审核</h1>
+        <p>查看新提交，审核后再发布到大家分享。</p>
+      </div>
+      <a class="admin-link" href="./">返回大家分享 ↗</a>
+    </header>
+    <section class="admin-stats">
+      <div class="admin-stat"><span>待审核</span><strong id="pendingCount">0</strong></div>
+      <div class="admin-stat"><span>已发布</span><strong id="publishedCount">0</strong></div>
+      <div class="admin-stat"><span>已归档</span><strong id="archivedCount">0</strong></div>
+    </section>
+    <nav class="admin-toolbar">
+      <button class="active" data-filter="pending">待审核</button>
+      <button data-filter="published">已发布</button>
+      <button data-filter="archived">已归档</button>
+    </nav>
+    <main class="admin-list" id="adminList"></main>
+  </div>
+  <script>
+    const list = document.querySelector('#adminList');
+    let current = 'pending';
+    const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    const setCount = (selector, value) => { document.querySelector(selector).textContent = value; };
+
+    async function load() {
+      let all = [];
+      try {
+        const response = await fetch('/api/submissions');
+        if (!response.ok) throw new Error('api unavailable');
+        all = await response.json();
+      } catch {
+        setCount('#pendingCount', 0);
+        setCount('#publishedCount', 0);
+        setCount('#archivedCount', 0);
+        list.innerHTML = '<div class="empty-admin"><strong>后台服务未启动</strong><span>内容审核页需要运行 server.mjs 后才能读取和更新提交。线上静态版只用于浏览资源。</span></div>';
+        return;
+      }
+
+      setCount('#pendingCount', all.filter((x) => x.status === 'pending').length);
+      setCount('#publishedCount', all.filter((x) => x.status === 'published').length);
+      setCount('#archivedCount', all.filter((x) => x.status === 'archived').length);
+      const items = all.filter((x) => x.status === current);
+      list.innerHTML = items.length ? items.map((x) => `
+        <article class="admin-card">
+          <div class="admin-card-top">
+            <div><span class="category-pill">${esc(x.category)}</span><h2>${esc(x.title)}</h2></div>
+            <span class="status-pill">${esc(x.status)}</span>
+          </div>
+          <div class="admin-meta">${esc(x.shareType)} · ${new Date(x.submittedAt).toLocaleString('zh-CN')}</div>
+          <p>${esc(x.reason)}</p>
+          ${x.url ? `<div class="admin-meta">链接：${esc(x.url)}</div>` : ''}
+          ${x.links?.length ? `<div class="admin-meta">链接数量：${x.links.length}</div>` : ''}
+          <div class="admin-actions">
+            ${x.status === 'pending' ? `<button data-action="published" data-id="${x.id}">通过并发布</button><button class="reject" data-action="rejected" data-id="${x.id}">退回修改</button>` : ''}
+            ${x.status === 'published' ? `<button class="archive" data-action="archived" data-id="${x.id}">归档</button>` : ''}
+            ${x.status === 'archived' ? `<button data-action="pending" data-id="${x.id}">恢复待审核</button>` : ''}
+          </div>
+        </article>
+      `).join('') : '<div class="empty-admin">当前没有内容</div>';
+    }
+
+    document.querySelectorAll('[data-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        current = button.dataset.filter;
+        load();
+      });
+    });
+
+    list.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      await fetch(`/api/submissions/${button.dataset.id}`, {
+        method:'PATCH',
+        headers:{ 'Content-Type':'application/json' },
+        body:JSON.stringify({ status:button.dataset.action })
+      });
+      load();
+    });
+
+    load();
+  </script>
+</body>
+</html>
